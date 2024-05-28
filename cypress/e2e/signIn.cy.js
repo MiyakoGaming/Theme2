@@ -7,6 +7,6 @@ Cypress.on('uncaught:exception', (err, runnable) => {
 
 it('Sign in',()=>{
 
-cy.visit('https://www.my.jufsolution1.com')
+cy.visit('https://www.jufsolution1.com')
 
 })
