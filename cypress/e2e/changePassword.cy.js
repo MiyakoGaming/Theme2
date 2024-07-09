@@ -9,6 +9,8 @@
 //9. testChangePassword{(valid current password, invalid length new password (x > 8), invalid retype password (same as new password), length validation) , (test case, false)}
 //10. testChangePassword{(valid current password, invalid length new password (x > 8), invalid retype password (same as new password)) , (test case, true)}
 //11. testChangePassword{(invalid current password, invalid length new password (x < 8), invalid retype password (same as new password), length validation) , (test case, false)}
+//12. testChangePassword{(invalid current password, invalid length new password (x < 8), invalid retype password (same as new password)) , (test case, true)}
+//11. testChangePassword{(invalid current password, invalid length new password (x > 8), invalid retype password (same as new password), length validation) , (test case, false)}
 //12. testChangePassword{(invalid current password, invalid length new password (x > 8), invalid retype password (same as new password)) , (test case, true)}
 //13. testChangePassword{(valid current password, valid new password, invalid retype password (not same as new password)) , (test case, false)}
 //14. testChangePassword{(valid current password, valid new password, invalid retype password (not same as new password)) , (test case, true)}
@@ -45,90 +47,211 @@ var maxInvalidPassword = "1111122222333334444455555666667777788888999";
 beforeEach(() => {
   cy.Website_Sign_In_Page_URL();
   cy.Sign_In_Account(validUsername, validPassword);
-  cy.Click_Profile_Username_To_Account_Page(validUsername)
+  cy.Click_Profile_Username_To_Account_Page(validUsername);
   cy.My_Account_Page_Label();
   cy.Click_Change_Password_button_In_Account_Page();
 });
 
 //testChangePassword{(invalid current password, valid new password, valid retype password) , (test case, false)}
-it("Verify change password unsuccessful with invalid current password, valid new & retype password", () => {
-  // cy.Insert_Current_Password_Detail_With_Validation(currentPassword2);
-  // cy.Insert_New_Password_Detail_With_Validation(newPassword1);
-  // cy.Insert_Retype_Password_Detail_With_Validation(newPassword1);
-  // cy.Submit_Change_Password();
-  // cy.My_Account_Page_Label();
+it.skip("Verify change password unsuccessful with invalid current password, valid new & retype password", () => {
+  cy.Insert_Current_Password_Detail_With_Validation(currentPassword2);
+  cy.Insert_New_Password_Detail_With_Validation(newPassword1);
+  cy.Insert_Retype_Password_Detail_With_Validation(newPassword1);
+  cy.Submit_Change_Password();
+  cy.My_Account_Page_Label();
 });
 
-// //2. testChangePassword{(invalid current password, valid new password, valid retype password) , (test case, true)}
-// it("Verify change password unsuccessful with invalid current password, valid new & retype password", () => {
-//   // cy.Insert_Current_Password_Detail_With_Validation(currentPassword2);
-//   // cy.Insert_New_Password_Detail_With_Validation(newPassword1);
-//   // cy.Insert_Retype_Password_Detail_With_Validation(newPassword1);
-//   // cy.Submit_Change_Password();
-//   // cy.Current_Password_Error_Message();
-// });
+//testChangePassword{(invalid current password, valid new password, valid retype password) , (test case, true)}
+it.skip("Verify change password unsuccessful with invalid current password, valid new & retype password", () => {
+  cy.Insert_Current_Password_Detail_Without_Validation(currentPassword2);
+  cy.Insert_New_Password_Detail_Without_Validation(newPassword2);
+  cy.Insert_Retype_Password_Detail_Without_Validation(newPassword2);
+  cy.Submit_Change_Password();
+  cy.Current_Password_Error_Message();
+});
 
-// //3. testChangePassword{(invalid length current password (x < 8), valid new password, valid retype password, length validation) , (test case, false)}
-// it("Verify change password unsuccessful with invalid min length current password, valid new password", () => {
-//   // cy.Insert_Current_Password_Detail_With_Validation(minInvalidPassword);
-//   // cy.Insert_New_Password_Detail_With_Validation(newPassword1);
-//   // cy.Insert_Retype_Password_Detail_With_Validation(newPassword1);
-//   // cy.Submit_Change_Password();
-// });
+//testChangePassword{(invalid length current password (x < 8), valid new password, valid retype password, length validation) , (test case, false)}
+it.skip("Verify change password unsuccessful with invalid min length current password, valid new & retype password", () => {
+  cy.Insert_Current_Password_Detail_With_Validation(minInvalidPassword);
+  cy.Insert_New_Password_Detail_With_Validation(newPassword1);
+  cy.Insert_Retype_Password_Detail_With_Validation(newPassword1);
+  cy.Submit_Change_Password();
+});
 
-// //testChangePassword{(invalid length current password (x < 8), valid new password, valid retype password) , (test case, true)}
-// it("Verify change password unsuccessful", () => {});
+//testChangePassword{(invalid length current password (x < 8), valid new password, valid retype password) , (test case, true)}
+it.skip("Verify change password unsuccessful with invalid min length current password, valid new & retype password", () => {
+  cy.Insert_Current_Password_Detail_Without_Validation(minInvalidPassword);
+  cy.Insert_New_Password_Detail_Without_Validation(newPassword1);
+  cy.Insert_Retype_Password_Detail_Without_Validation(newPassword1);
+  cy.Submit_Change_Password();
+  cy.Current_Password_Error_Message();
+});
 
-// //testChangePassword{(invalid length current password (x > 8), valid new password, valid retype password, length validation) , (test case, false)}
-// it("Verify change password unsuccessful", () => {});
+//testChangePassword{(invalid length current password (x > 8), valid new password, valid retype password, length validation) , (test case, false)}
+it.skip("Verify change password unsuccessful with invalid max length current password, valid new & retype password", () => {
+  cy.Insert_Current_Password_Detail_With_Validation(maxInvalidPassword);
+  cy.Insert_New_Password_Detail_With_Validation(newPassword1);
+  cy.Insert_Retype_Password_Detail_With_Validation(newPassword1);
+  cy.Submit_Change_Password();
+});
 
-// //testChangePassword{(invalid length current password (x > 8), valid new password, valid retype password) , (test case, true)}
-// it("Verify change password unsuccessful", () => {});
+//testChangePassword{(invalid length current password (x > 8), valid new password, valid retype password) , (test case, true)}
+it.skip("Verify change password unsuccessful with invalid max length current password, valid new & retype password", () => {
+  cy.Insert_Current_Password_Detail_Without_Validation(maxInvalidPassword);
+  cy.Insert_New_Password_Detail_Without_Validation(newPassword1);
+  cy.Insert_Retype_Password_Detail_Without_Validation(newPassword1);
+  cy.Submit_Change_Password();
+  cy.Current_Password_Error_Message();
+});
 
-// //testChangePassword{(valid current password, invalid length new password (x < 8), invalid retype password (same as new password), length validation) , (test case, false)}
-// it("Verify change password unsuccessful", () => {});
+//testChangePassword{(valid current password, invalid length new password (x < 8), invalid retype password (same as new password), length validation) , (test case, false)}
+it.skip("Verify change password unsuccessful with valid current password, invalid min length new & retype password", () => {
+  cy.Insert_Current_Password_Detail_With_Validation(currentPassword1);
+  cy.Insert_New_Password_Detail_With_Validation(minInvalidPassword);
+  cy.Insert_Retype_Password_Detail_With_Validation(minInvalidPassword);
+  cy.Submit_Change_Password();
+});
 
-// //testChangePassword{(valid current password, invalid length new password (x < 8), invalid retype password (same as new password)) , (test case, true)}
-// it("Verify change password unsuccessful", () => {});
+//testChangePassword{(valid current password, invalid length new password (x < 8), invalid retype password (same as new password)) , (test case, true)}
+it.skip("Verify change password unsuccessful with valid current password, invalid min length new & retype password", () => {
+  cy.Insert_Current_Password_Detail_Without_Validation(currentPassword1);
+  cy.Insert_New_Password_Detail_Without_Validation(minInvalidPassword);
+  cy.Insert_Retype_Password_Detail_Without_Validation(minInvalidPassword);
+  cy.Submit_Change_Password();
+  cy.New_Password_Error_Message();
+});
 
-// //testChangePassword{(valid current password, invalid length new password (x > 8), invalid retype password (same as new password), length validation) , (test case, false)}
-// it("Verify change password unsuccessful", () => {});
+//testChangePassword{(valid current password, invalid length new password (x > 8), invalid retype password (same as new password), length validation) , (test case, false)}
+it.skip("Verify change password unsuccessful with valid current password, invalid max length new & retype password", () => {
+  cy.Insert_Current_Password_Detail_With_Validation(currentPassword1);
+  cy.Insert_New_Password_Detail_With_Validation(maxInvalidPassword);
+  cy.Insert_Retype_Password_Detail_With_Validation(maxInvalidPassword);
+  cy.Submit_Change_Password();
+});
 
-// //testChangePassword{(valid current password, invalid length new password (x > 8), invalid retype password (same as new password)) , (test case, true)}
-// it("Verify change password unsuccessful", () => {});
+//testChangePassword{(valid current password, invalid length new password (x > 8), invalid retype password (same as new password)) , (test case, true)}
+it.skip("Verify change password unsuccessful with valid current password, invalid max length new & retype password", () => {
+  cy.Insert_Current_Password_Detail_Without_Validation(currentPassword1);
+  cy.Insert_New_Password_Detail_Without_Validation(maxInvalidPassword);
+  cy.Insert_Retype_Password_Detail_Without_Validation(maxInvalidPassword);
+  cy.Submit_Change_Password();
+  cy.New_Password_Error_Message();
+});
 
-// //testChangePassword{(invalid current password, invalid length new password (x < 8), invalid retype password (same as new password), length validation) , (test case, false)}
-// it("Verify change password unsuccessful", () => {});
+//testChangePassword{(invalid current password, invalid length new password (x < 8), invalid retype password (same as new password), length validation) , (test case, false)}
+it.skip("Verify change password unsuccessful with invalid current password, invalid min length new & retype password", () => {
+  cy.Insert_Current_Password_Detail_With_Validation(currentPassword2);
+  cy.Insert_New_Password_Detail_With_Validation(minInvalidPassword);
+  cy.Insert_Retype_Password_Detail_With_Validation(minInvalidPassword);
+  cy.Submit_Change_Password();
+});
 
-// //testChangePassword{(invalid current password, invalid length new password (x > 8), invalid retype password (same as new password)) , (test case, true)}
-// it("Verify change password unsuccessful", () => {});
+//testChangePassword{(invalid current password, invalid length new password (x < 8), invalid retype password (same as new password)) , (test case, true)}
+it.skip("Verify change password unsuccessful with invalid current password, invalid min length new & retype password", () => {
+  cy.Insert_Current_Password_Detail_Without_Validation(currentPassword2);
+  cy.Insert_New_Password_Detail_Without_Validation(minInvalidPassword);
+  cy.Insert_Retype_Password_Detail_Without_Validation(minInvalidPassword);
+  cy.Submit_Change_Password();
+  cy.New_Password_Error_Message();
+});
 
-// //testChangePassword{(valid current password, valid new password, invalid retype password (not same as new password)) , (test case, false)}
-// it("Verify change password unsuccessful", () => {});
+//testChangePassword{(invalid current password, invalid length new password (x > 8), invalid retype password (same as new password), length validation) , (test case, false)}
+it.skip("Verify change password unsuccessful with invalid current password, invalid max length new & retype password", () => {
+  cy.Insert_Current_Password_Detail_With_Validation(currentPassword2);
+  cy.Insert_New_Password_Detail_With_Validation(maxInvalidPassword);
+  cy.Insert_Retype_Password_Detail_With_Validation(maxInvalidPassword);
+  cy.Submit_Change_Password();
+});
 
-// //testChangePassword{(valid current password, valid new password, invalid retype password (not same as new password)) , (test case, true)}
-// it("Verify change password unsuccessful", () => {});
+//testChangePassword{(invalid current password, invalid length new password (x > 8), invalid retype password (same as new password)) , (test case, true)}
+it.skip("Verify change password unsuccessful with invalid current password, invalid max length new & retype password", () => {
+  cy.Insert_Current_Password_Detail_Without_Validation(currentPassword2);
+  cy.Insert_New_Password_Detail_Without_Validation(maxInvalidPassword);
+  cy.Insert_Retype_Password_Detail_Without_Validation(maxInvalidPassword);
+  cy.Submit_Change_Password();
+  cy.New_Password_Error_Message();
+});
 
-// //testChangePassword{(valid current password, valid new password, invalid retype password (x < 8)) , (test case, false)}
-// it("Verify change password unsuccessful", () => {});
+//testChangePassword{(valid current password, valid new password, invalid retype password (not same as new password)) , (test case, false)}
+it.skip("Verify change password unsuccessful with valid current & new password, invalid retype password", () => {
+  cy.Insert_Current_Password_Detail_With_Validation(currentPassword1);
+  cy.Insert_New_Password_Detail_With_Validation(newPassword2);
+  cy.Insert_Retype_Password_Detail_With_Validation(newPassword1);
+  cy.Submit_Change_Password();
+  cy.My_Account_Page_Label();
+});
 
-// //testChangePassword{(valid current password, valid new password, invalid retype password (x < 8)) , (test case, true)}
-// it("Verify change password unsuccessful", () => {});
+//testChangePassword{(valid current password, valid new password, invalid retype password (not same as new password)) , (test case, true)}
+it.skip("Verify change password unsuccessful with valid current & new password, invalid retype password", () => {
+  cy.Insert_Current_Password_Detail_With_Validation(currentPassword1);
+  cy.Insert_New_Password_Detail_With_Validation(newPassword2);
+  cy.Insert_Retype_Password_Detail_With_Validation(newPassword1);
+  cy.Submit_Change_Password();
+  cy.Retype_Password_Error_Message();
+});
 
-// //testChangePassword{(valid current password, valid new password, invalid retype password (x > 8)) , (test case, false)}
-// it("Verify change password unsuccessful", () => {});
+//testChangePassword{(valid current password, valid new password, invalid retype password (x < 8), length validation) , (test case, false)}
+it("Verify change password unsuccessful with valid current & new password, invalid min length retype password", () => {
+  cy.Insert_Current_Password_Detail_With_Validation(currentPassword1);
+  cy.Insert_New_Password_Detail_With_Validation(newPassword1);
+  cy.Insert_Retype_Password_Detail_With_Validation(minInvalidPassword);
+  cy.Submit_Change_Password();
+});
 
-// //testChangePassword{(valid current password, valid new password, invalid retype password (x > 8)) , (test case, true)}
-// it("Verify change password unsuccessful", () => {});
+//testChangePassword{(valid current password, valid new password, invalid retype password (x < 8)) , (test case, true)}
+it("Verify change password unsuccessful with valid current & new password, invalid min length retype password", () => {
+  cy.Insert_Current_Password_Detail_Without_Validation(currentPassword1);
+  cy.Insert_New_Password_Detail_Without_Validation(newPassword1);
+  cy.Insert_Retype_Password_Detail_Without_Validation(minInvalidPassword);
+  cy.Submit_Change_Password();
+  cy.Retype_Password_Error_Message();
+});
 
-// //testChangePassword{(valid current password, valid new password, valid retype password, true) , (test case, true)}
-// it("Verify change password unsuccessful", () => {});
+//testChangePassword{(valid current password, valid new password, invalid retype password (x > 8), length validation) , (test case, false)}
+it("Verify change password unsuccessful with valid current & new password, invalid max length retype password", () => {
+  cy.Insert_Current_Password_Detail_With_Validation(currentPassword1);
+  cy.Insert_New_Password_Detail_With_Validation(newPassword1);
+  cy.Insert_Retype_Password_Detail_With_Validation(maxInvalidPassword);
+  cy.Submit_Change_Password();
+});
 
-// //testChangePassword{(empty current password, empty new password, empty retype password, current password show message) , (test case, true)}
-// it("Verify change password unsuccessful", () => {});
+//testChangePassword{(valid current password, valid new password, invalid retype password (x > 8)) , (test case, true)}
+it("Verify change password unsuccessful with valid current & new password, invalid max length retype password", () => {
+  cy.Insert_Current_Password_Detail_Without_Validation(currentPassword1);
+  cy.Insert_New_Password_Detail_Without_Validation(newPassword1);
+  cy.Insert_Retype_Password_Detail_Without_Validation(maxInvalidPassword);
+  cy.Submit_Change_Password();
+  cy.Retype_Password_Error_Message();
+});
 
-// //testChangePassword{(valid current password, empty new password, empty retype password, new password show message) , (test case, true)}
-// it("Verify change password unsuccessful", () => {});
+//testChangePassword{(valid current password, valid new password, valid retype password, true) , (test case, true)}
+it.skip("Verify change password unsuccessful with valid current, new, retype password", () => {
+  cy.Insert_Current_Password_Detail_Without_Validation(currentPassword1);
+  cy.Insert_New_Password_Detail_Without_Validation(newPassword1);
+  cy.Insert_Retype_Password_Detail_Without_Validation(newPassword1);
+  cy.Submit_Change_Password();
+});
 
-// //testChangePassword{(valid current password, valid new password, empty retype password, retype password show message) , (test case, true)}
-// it("Verify change password unsuccessful", () => {});
+//testChangePassword{(empty current password, empty new password, empty retype password, current password show message) , (test case, true)}
+it("Verify change password unsuccessful", () => {
+  cy.Insert_New_Password_Detail_Without_Validation(newPassword1);
+  cy.Insert_Retype_Password_Detail_Without_Validation(newPassword1);
+  cy.Submit_Change_Password();
+  cy.Current_Password_Validation_Message();
+});
+
+//testChangePassword{(valid current password, empty new password, empty retype password, new password show message) , (test case, true)}
+it("Verify change password unsuccessful", () => {
+  cy.Insert_Current_Password_Detail_Without_Validation(currentPassword1);
+  cy.Insert_Retype_Password_Detail_Without_Validation(newPassword1);
+  cy.Submit_Change_Password();
+  cy.New_Password_Validation_Message();
+});
+
+//testChangePassword{(valid current password, valid new password, empty retype password, retype password show message) , (test case, true)}
+it("Verify change password unsuccessful", () => {
+  cy.Insert_Current_Password_Detail_Without_Validation(currentPassword1);
+  cy.Insert_New_Password_Detail_Without_Validation(newPassword1);
+  cy.Submit_Change_Password();
+  cy.Retype_Password_Validation_Message();
+});

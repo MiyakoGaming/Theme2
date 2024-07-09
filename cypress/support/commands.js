@@ -99,38 +99,6 @@ Cypress.Commands.add(
   }
 );
 
-//Deposit Page Label
-const depositPageLabel = ".deposit_sectionTitle__3_7Pw";
-var depositPageLabelText = "Deposit Options";
-
-Cypress.Commands.add("Deposit_Page_Label", () => {
-  cy.get(depositPageLabel).should("have.text", depositPageLabelText);
-});
-
-//Withdraw Page Label
-const withdrawPageLabel = ".withdraw_title___Mxpi";
-var withdrawPageLabelText = "Withdraw";
-
-Cypress.Commands.add("Withdraw_Page_Label", () => {
-  cy.get(withdrawPageLabel).should("have.text", withdrawPageLabelText);
-});
-
-//Manage Bank Page Label
-const manageBankPageLabel = ".banks_title__OYN7q";
-var manageBankPageLabelText = "Link account";
-
-Cypress.Commands.add("Manage_Bank_Page_Label", () => {
-  cy.get(manageBankPageLabel).should("have.text", manageBankPageLabelText);
-});
-
-//Link a Bank Account Page Label
-const linkABankPageLabel = ".main_title__6Mbhv";
-var linkABankPageLabelText = "Link a bank account";
-
-Cypress.Commands.add("Link_A_Bank_Account_Page_Label", () => {
-  cy.get(linkABankPageLabel).should("have.text", linkABankPageLabelText);
-});
-
 //Change Password Page Label
 const changePasswordPageLabel = ".change-password_pageTitle__Ic892";
 var changePasswordPageLabelText = "Change Password";
@@ -140,61 +108,6 @@ Cypress.Commands.add("Change_Password_Page_Label", () => {
     "have.text",
     changePasswordPageLabelText
   );
-});
-
-//Referral Page Label
-const referralPageLabel = ".referral_mainDesc__beIRm";
-var referralPageLabelText = "Refer Friends & Earn Rewards";
-
-Cypress.Commands.add("Referral_Page_Label", () => {
-  cy.get(referralPageLabel).should("have.text", referralPageLabelText);
-});
-
-//Click Homepage & Account Page Deposit Icon --> Deposit Page
-const goToDepositIcon = ".actions-bar_action__DNPjc:nth-child(1)";
-
-Cypress.Commands.add("Click_Homepage_Deposit_Icon", () => {
-  cy.get(goToDepositIcon).click();
-});
-
-Cypress.Commands.add("Click_Account_Page_Deposit_Icon", () => {
-  cy.get(goToDepositIcon).click();
-});
-
-//Click Account Page Withdraw Icon --> Withdraw Page
-const goToWithdrawIcon = ".actions-bar_action__DNPjc:nth-child(4)";
-
-Cypress.Commands.add("Click_Homepage_Withdraw_Icon", () => {
-  cy.get(goToWithdrawIcon).click();
-});
-
-Cypress.Commands.add("Click_Account_Page_Withdraw_Icon", () => {
-  cy.get(goToWithdrawIcon).click();
-});
-
-//Click Homepage Promotion Icon --> Promotion Page
-const goToPromotionIcon = ".actions-bar_action__DNPjc:nth-child(4)";
-
-Cypress.Commands.add("Click_Homepage_Withdraw_Icon", () => {
-  cy.get(goToPromotionIcon).click();
-});
-
-//Click Homepage & Account Page Transfer Icon --> Transfer Page
-const goToTransferIcon = ".actions-bar_action__DNPjc:nth-child(2)";
-
-Cypress.Commands.add("Click_Homepage_Transfer_Icon", () => {
-  cy.get(goToTransferIcon).click();
-});
-
-Cypress.Commands.add("Click_Account_Page_Transfer_Icon", () => {
-  cy.get(goToTransferIcon).click();
-});
-
-//Click Account Page History Icon --> History Page
-const accountPageHistoryIcon = ".actions-bar_action__DNPjc:nth-child(5)";
-
-Cypress.Commands.add("Click_Account_Page_History_Icon", () => {
-  cy.get(accountPageHistoryIcon).click();
 });
 
 //Click Change Password in Account page
@@ -323,4 +236,71 @@ Cypress.Commands.add("New_Password_Error_Message", () => {
 
 Cypress.Commands.add("Retype_Password_Error_Message", () => {
   cy.get(passwordErrorMessage).should("have.text", errorRetyprPasswordText);
+});
+
+//Withdraw Page Label
+const withdrawPageLabel = ".withdraw_title___Mxpi";
+var withdrawPageLabelText = "Withdraw";
+
+Cypress.Commands.add("Withdraw_Page_Label", () => {
+  cy.get(withdrawPageLabel).should("have.text", withdrawPageLabelText);
+});
+
+//Manage Bank Page Label
+const manageBankPageLabel = ".banks_title__OYN7q";
+var manageBankPageLabelText = "Link account";
+
+Cypress.Commands.add("Manage_Bank_Page_Label", () => {
+  cy.get(manageBankPageLabel).should("have.text", manageBankPageLabelText);
+});
+
+//Link a Bank Account Page Label
+const linkABankPageLabel = ".main_title__6Mbhv";
+var linkABankPageLabelText = "Link a bank account";
+
+Cypress.Commands.add("Link_A_Bank_Account_Page_Label", () => {
+  cy.get(linkABankPageLabel).should("have.text", linkABankPageLabelText);
+});
+
+//Click Account Page Withdraw Icon --> Withdraw Page
+const goToWithdrawIcon = ".actions-bar_action__DNPjc:nth-child(4)";
+
+Cypress.Commands.add("Click_Homepage_Withdraw_Icon", () => {
+  cy.get(goToWithdrawIcon).click();
+});
+
+Cypress.Commands.add("Click_Account_Page_Withdraw_Icon", () => {
+  cy.get(goToWithdrawIcon).click();
+});
+
+//Click "See All" in withdraw page --> My Bank Account page
+const witdrawPageSeeAll = ".withdraw_seeAllBanks__axAFG";
+var witdrawPageSeeAlltext = "See All";
+
+Cypress.Commands.add(
+  "Click_See_All_Button_In_Withdraw_Page_To_My_Bank_Account_Page",
+  () => {
+    cy.get(witdrawPageSeeAll).should("have.text", witdrawPageSeeAlltext);
+    cy.get(witdrawPageSeeAll).click();
+  }
+);
+
+//Click "+" icon in withdraw page --> Link a bank account page
+const directLinkBank = ".withdraw_addBank__NoGd8";
+
+Cypress.Commands.add(
+  "Click_Add_Icon_In_Withdraw_Page_To_Link_Bank_Account_Page",
+  () => {
+    cy.get(directLinkBank).click();
+  }
+);
+
+//Click "Manage Bank" in My Account Page --> My Bank Account Page
+const manageBankButton =
+  ".account_list__QoL5F > .account_listItem__oN568:nth-child(1)";
+var manageBankButtonText = "Manage Banks";
+
+Cypress.Commands.add("Click_Manage_Banks_Button_In_My_Account_Page", () => {
+  cy.get(manageBankButton).should("have.text", manageBankButtonText);
+  cy.get(manageBankButton).click();
 });
