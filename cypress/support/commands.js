@@ -238,6 +238,23 @@ Cypress.Commands.add("Retype_Password_Error_Message", () => {
   cy.get(passwordErrorMessage).should("have.text", errorRetyprPasswordText);
 });
 
+//Click Account Page Withdraw Icon --> Withdraw Page
+const goToWithdrawIcon = ".actions-bar_action__DNPjc:nth-child(4)";
+
+Cypress.Commands.add("Click_Account_Page_Withdraw_Icon", () => {
+  cy.get(goToWithdrawIcon).click();
+});
+
+//Click "Manage Bank" in My Account Page --> My Bank Account Page
+const manageBankButton =
+  ".account_list__QoL5F > .account_listItem__oN568:nth-child(1)";
+var manageBankButtonText = "Manage Banks";
+
+Cypress.Commands.add("Click_Manage_Banks_Button_In_My_Account_Page", () => {
+  cy.get(manageBankButton).should("have.text", manageBankButtonText);
+  cy.get(manageBankButton).click();
+});
+
 //Withdraw Page Label
 const withdrawPageLabel = ".withdraw_title___Mxpi";
 var withdrawPageLabelText = "Withdraw";
@@ -247,8 +264,8 @@ Cypress.Commands.add("Withdraw_Page_Label", () => {
 });
 
 //Manage Bank Page Label
-const manageBankPageLabel = ".banks_title__OYN7q";
-var manageBankPageLabelText = "Link account";
+const manageBankPageLabel = ".banks_sectionTitle__VyJQW";
+var manageBankPageLabelText = "My bank accounts";
 
 Cypress.Commands.add("Manage_Bank_Page_Label", () => {
   cy.get(manageBankPageLabel).should("have.text", manageBankPageLabelText);
@@ -262,16 +279,25 @@ Cypress.Commands.add("Link_A_Bank_Account_Page_Label", () => {
   cy.get(linkABankPageLabel).should("have.text", linkABankPageLabelText);
 });
 
-//Click Account Page Withdraw Icon --> Withdraw Page
-const goToWithdrawIcon = ".actions-bar_action__DNPjc:nth-child(4)";
+//Click "+" icon in withdraw page --> Link a bank account page
+const addIconInWithdrawPage = ".withdraw_addBankIcon__045CA";
 
-Cypress.Commands.add("Click_Homepage_Withdraw_Icon", () => {
-  cy.get(goToWithdrawIcon).click();
-});
+Cypress.Commands.add(
+  "Click_Add_Icon_In_Withdraw_Page_To_Link_Bank_Account_Page",
+  () => {
+    cy.get(addIconInWithdrawPage).click();
+  }
+);
 
-Cypress.Commands.add("Click_Account_Page_Withdraw_Icon", () => {
-  cy.get(goToWithdrawIcon).click();
-});
+//Click "+" icon in My Bank Accounts --> Link a bank account page
+const addIconInMyBankAccountPage = ".banks_addBankIcon__Kr_qy";
+
+Cypress.Commands.add(
+  "Click_Add_Icon_In_My_Bank_Account_Page_To_Link_Bank_Account_Page",
+  () => {
+    cy.get(addIconInMyBankAccountPage).click();
+  }
+);
 
 //Click "See All" in withdraw page --> My Bank Account page
 const witdrawPageSeeAll = ".withdraw_seeAllBanks__axAFG";
@@ -285,22 +311,151 @@ Cypress.Commands.add(
   }
 );
 
-//Click "+" icon in withdraw page --> Link a bank account page
-const directLinkBank = ".withdraw_addBank__NoGd8";
+//Select Bank in bank list in Link A bank Account Page
+const bankListContainer = ".inputs_selectTriggerButton__1Cuu_";
+const bankListPopUp = ".inputs_options__LHQL7";
+const closeBankListPopUp = ".inputs_icon__y16Hv";
+const maybank =
+  ".inputs_options__LHQL7 > .inputs_optionWrapper___eVdd:nth-child(15)";
+const cimbBank =
+  ".inputs_options__LHQL7 > .inputs_optionWrapper___eVdd:nth-child(9)";
+const amBank =
+  ".inputs_options__LHQL7 > .inputs_optionWrapper___eVdd:nth-child(3)";
+var bankListText = "Select your bank";
+var maybankText = "Maybank";
+var cimbBankText = "CIMB Bank";
+var amBankText = "AmBank";
+
+Cypress.Commands.add("Click_Bank_Container", () => {
+  cy.get(bankListContainer).should("have.text", bankListText);
+  cy.get(bankListContainer).click();
+});
+
+Cypress.Commands.add("Click_Maybank_In_Bank_List", () => {
+  cy.get(maybank).click();
+  cy.get(bankListContainer).should("have.text", maybankText);
+});
+
+Cypress.Commands.add("Click_CIMB_Bank_In_Bank_List", () => {
+  cy.get(cimbBank).click();
+  cy.get(bankListContainer).should("have.text", cimbBankText);
+});
+
+Cypress.Commands.add("Click_AmBank_In_Bank_List", () => {
+  cy.get(amBank).click();
+  cy.get(bankListContainer).should("have.text", amBankText);
+});
+
+Cypress.Commands.add("Click_X_Button_Close_Bank_List_Pop_Up", () => {
+  cy.get(closeBankListPopUp).click();
+});
+
+//Insert Account Number and validation Message
+const accountNumberContainer = "#accountNo";
 
 Cypress.Commands.add(
-  "Click_Add_Icon_In_Withdraw_Page_To_Link_Bank_Account_Page",
-  () => {
-    cy.get(directLinkBank).click();
+  "Insert_Account_Number_In_Account_Number_container",
+  (accountNumber) => {
+    cy.get(accountNumberContainer).click();
+    cy.get(accountNumberContainer).type(accountNumber);
   }
 );
 
-//Click "Manage Bank" in My Account Page --> My Bank Account Page
-const manageBankButton =
-  ".account_list__QoL5F > .account_listItem__oN568:nth-child(1)";
-var manageBankButtonText = "Manage Banks";
-
-Cypress.Commands.add("Click_Manage_Banks_Button_In_My_Account_Page", () => {
-  cy.get(manageBankButton).should("have.text", manageBankButtonText);
-  cy.get(manageBankButton).click();
+Cypress.Commands.add("Account_Number_Validation_Message", () => {
+  cy.get(accountNumberContainer)
+    .invoke("prop", "validationMessage")
+    .should("equal", "Please fill out this field.");
 });
+
+//Click Link bank Account button
+const linkBankAccountButton =
+  ".bank-inputs_actionContainer__0HlAS > .TT__standard-button";
+var linkBankAccountButtonText = "Link bank account";
+
+Cypress.Commands.add("Click_Link_Bank_Account_Button", () => {
+  cy.get(linkBankAccountButton).should("have.text", linkBankAccountButtonText);
+  cy.get(linkBankAccountButton).click();
+});
+
+//Error message below Account Number
+const accountNumberErrorMessage = ".inputs_error__MFgZN";
+var accountNumberErrorMessageText = "Please enter a valid account number";
+
+Cypress.Commands.add("Account_Number_Error_message", () => {
+  cy.get(accountNumberErrorMessage).should(
+    "have.text",
+    accountNumberErrorMessageText
+  );
+});
+
+//Link a bank account page show message when reach max 5 banks
+const reachLimitMessage = ".banks_addBankContent__N1Kql > .errorPanel";
+var reachLimitMessageText = "You cannot have more than 5 bank accounts.";
+
+Cypress.Commands.add("Link_A_bank_account_Page_Reach_Limit_Message", () => {
+  cy.get(reachLimitMessage).should("have.text", reachLimitMessageText);
+});
+
+//Link a bank account error pop up when duplicate account number
+const duplicatedErrorMessagePopUp = ".modal_message__hHpBD";
+const closeduplicatedErrorMessagePopUp =
+  ".modal_action__0o7AY > .TT__standard-button";
+var duplicatedErrorMessagePopUpText =
+  "Seems like you have the same bank account number, please use another bank account";
+var closeduplicatedErrorMessagePopUpText = "Okay";
+
+Cypress.Commands.add("Duplicate_Account_Number_Error_Message", () => {
+  cy.get(duplicatedErrorMessagePopUp).should(
+    "have.text",
+    duplicatedErrorMessagePopUpText
+  );
+});
+
+Cypress.Commands.add("Close_Duplicate_Account_Number_Error_Message", () => {
+  cy.get(closeduplicatedErrorMessagePopUp).should(
+    "have.text",
+    closeduplicatedErrorMessagePopUpText
+  );
+  cy.get(closeduplicatedErrorMessagePopUp).click();
+});
+
+//Point second bank in My Bank Account page
+const secondBankInBankAccount =
+  ":nth-child(2) > .grid-option-button_option__TNZ8v";
+const deleteIcon = ":nth-child(2) > .banks_deleteBank__jQvLW";
+
+Cypress.Commands.add("Point_And_Click_Delete_Icon", () => {
+  cy.get(secondBankInBankAccount).trigger("mouseover");
+  cy.get(deleteIcon).invoke('show').click()
+});
+
+//Button in delete bank Pop Up
+const deleteBankNoButton = '.buttons_button__Pv4L3:nth-child(2)'
+const deleteBankYesButton = '.buttons_button__Pv4L3:nth-child(1)'
+var deleteBankNoButtonText = 'No'
+var deleteBankYesButtonText = 'Delete bank'
+
+Cypress.Commands.add('Click_No_Button_In_Delete_bank_Pop_Up', ()=>{
+  cy.get(deleteBankNoButton).should('have.text', deleteBankNoButtonText)
+  cy.get(deleteBankNoButton).click()
+})
+
+Cypress.Commands.add('Click_Delete_bank_Button_In_Delete_bank_Pop_Up', ()=>{
+  cy.get(deleteBankYesButton).should('have.text', deleteBankYesButtonText)
+  cy.get(deleteBankYesButton).click()
+})
+
+//Click Homepage & Account Page Deposit Icon --> Deposit Page
+const goToDepositIcon = ".actions-bar_action__DNPjc:nth-child(1)";
+
+Cypress.Commands.add("Click_Homepage_Deposit_Icon", () => {
+  cy.get(goToDepositIcon).click();
+});
+
+Cypress.Commands.add("Click_Account_Page_Deposit_Icon", () => {
+  cy.get(goToDepositIcon).click();
+});
+
+//Deposit Page Label
+const depositPageLabel = ".deposit_sectionTitle__3_7Pw";
+var depositPageLabelText = "Deposit Options";
